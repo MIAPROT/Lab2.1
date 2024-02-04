@@ -1,6 +1,8 @@
                          package com.example.lab21;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.View;
@@ -14,16 +16,18 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ArrayList<State> states = new ArrayList();
-    ListView countriesList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        setInitialData();
-        countriesList = (ListView) findViewById(R.id.countriesList);
-        StateAdapter stateAdapter = new StateAdapter(this, R.layout.list_item, states);
+        RecyclerView countriesList = (RecyclerView) findViewById(R.id.CountryList);
+        ArrayList<State> states = new ArrayList();
+        states.add(new State("Россия", "Москва", R.drawable.ru));
+        states.add(new State("США", "Вашингтон", R.drawable.us));
+        states.add(new State("Австралия", "Канберра", R.drawable.au));
+        states.add(new State("Япония", "Токио", R.drawable.jp));
+        states.add(new State("Вьетнам", "Ханой", R.drawable.vn));
+        StateAdapter stateAdapter = new StateAdapter(states);
         countriesList.setAdapter(stateAdapter);
         AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener()
         {
@@ -34,17 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-        countriesList.setOnItemClickListener(itemListener);
+        countriesList.setLayoutManager(new LinearLayoutManager(this));
 
 
     }
 
-    private void setInitialData()
-    {
-        states.add(new State("Россия", "Москва", R.drawable.ru));
-        states.add(new State("США", "Вашингтон", R.drawable.us));
-        states.add(new State("Австралия", "Канберра", R.drawable.au));
-        states.add(new State("Япония", "Токио", R.drawable.jp));
-        states.add(new State("Вьетнам", "Ханой", R.drawable.vn));
-    }
 }
