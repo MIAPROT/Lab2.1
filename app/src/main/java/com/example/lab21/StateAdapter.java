@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,12 +49,29 @@ public class StateAdapter extends RecyclerView.Adapter<StateAdapter.ViewHolder> 
         ImageView imageView = holder.flagView;
         imageView.setImageResource(state.getFlagResource());
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(mListener != null)
+                {
+                    mListener.onItemClick(state);
+                }
+            }
+        });
+
+    }
+
+    private OnItemClickListener mListener;
+    public interface OnItemClickListener {
+        void onItemClick(State state);
     }
 
     @Override
     public int getItemCount() {
         return states.size();
     }
+
+    public void setOnItemClickListener(OnItemClickListener listener){mListener = listener;}
 
     public StateAdapter(List<State> mstates) {
         states = mstates;

@@ -1,4 +1,4 @@
-                         package com.example.lab21;
+package com.example.lab21;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,15 +29,12 @@ public class MainActivity extends AppCompatActivity {
         states.add(new State("Вьетнам", "Ханой", R.drawable.vn));
         StateAdapter stateAdapter = new StateAdapter(states);
         countriesList.setAdapter(stateAdapter);
-        AdapterView.OnItemClickListener itemListener = new AdapterView.OnItemClickListener()
-        {
+        stateAdapter.setOnItemClickListener(new StateAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                State selectedState = (State)parent.getItemAtPosition(position);
-                Toast.makeText(getApplicationContext(), "Был выбран пункт " + selectedState.getName(), Toast.LENGTH_SHORT).show();
-
+            public void onItemClick(State state) {
+                Toast.makeText(MainActivity.this, "Был выбран пункт " + state.getName(), Toast.LENGTH_SHORT).show();
             }
-        };
+        });
         countriesList.setLayoutManager(new LinearLayoutManager(this));
 
 

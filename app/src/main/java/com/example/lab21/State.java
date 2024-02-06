@@ -1,9 +1,9 @@
 package com.example.lab21;
 
 public class State {
-    private String name; // название
-    private String capital;  // столица
-    private int flagResource; // ресурс флага
+    private String name;
+    private String capital;
+    private int flagResource;
 
     public State(String name, String capital, int flag){
 
